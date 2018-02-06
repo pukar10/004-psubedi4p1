@@ -22,3 +22,8 @@ switch from John:  card (FOUR,DIAMONDS),  switch to Pukar
 Winner is: Pukar with 154 points
 
 Process finished with exit code 0
+
+
+//test for duplicate players
+//test for tie score
+//test for

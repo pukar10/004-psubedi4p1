@@ -21,6 +21,7 @@ public class Deck<T extends Card> {
 	/**
 	 * Creates a new empty hand which holds cards.
 	 * initializes setOfCards.
+	 * runTime: O(1)
 	 */
 	public Deck(){
 		setOfCards = new Hand<T>();
@@ -105,7 +106,13 @@ public class Deck<T extends Card> {
 	public int cardCount(){
 		return this.setOfCards.numCards();
 	}
-	
+
+	/**
+	 * creatse a string version of the Object.
+	 * runTime: O(1)
+	 *
+	 * @return a string of the object Deck
+	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder("Deck ");
     		int numCards = cardCount();
