@@ -36,6 +36,7 @@ public class CardSwitch extends Card{
      * @return
      *     true or false if they have same Rank and Suit
      */
+    @Override
     public boolean equals(Card anotherCard){
 		// checks if two cards equals  and returns a boolean
 		if(this.getRank() == anotherCard.getRank() && this.getSuit() == anotherCard.getSuit()) {
@@ -51,6 +52,7 @@ public class CardSwitch extends Card{
      * @return
      *     Returns an int value representing points, calculated from Card.Rank
      */
+    @Override
     public int getPoints(){
 	    // return points of the card
         if(super.getRank() == Rank.ACE){

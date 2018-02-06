@@ -70,6 +70,12 @@ class Player <T extends Card> {
 	public int getPoints(){
 		// return points of this player
 		// determined by cards in hand
+		int total = 0;
+		for(int i = 0; i < hand.numCards(); i++){
+			total += hand.getCard(i).getPoints();
+		}
+
+
 		int totalPoints = 0;
 		for(int i = 0; i < hand.numCards(); i++){
 			Card temp = hand.getCard(i);
@@ -101,13 +107,13 @@ class Player <T extends Card> {
 		// receive a card and add it to hand
 		// return
 		if (hand.indexOf(c) == -1) {
-			System.out.println("Card not found");
-			return false;
-		}else{
+//			System.out.println("Card added: "+c.toString());
 			hand.addCard(c);
 			getPoints();
-			System.out.println("total points: "+getPoints());
 			return true;
+		}else{
+//			System.out.println("Card not added, already in hand.");
+			return false;
 		}
 
 	}

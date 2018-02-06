@@ -11,6 +11,8 @@ import java.lang.reflect.Array;
  *
  * Description: holds array of Cards. T = any subclass of Cards. represends a Hand of cards.
  * 				Works like an arraylist.
+ *
+ * 			    DYNAMIC ARRAYLIST!
  * 
  ***************************************************************************/
 
@@ -50,19 +52,18 @@ public class Hand<T extends Card>{
 		// return card at index 
 		// throw RuntimeException for invalid index
 		// O(1)
-		try{
-			T temp;
-			if(cards[index] != null){
-				//numCards--;
-				temp = cards[index];
-				//cards[index] = null;
-				return temp;
-			}
-		}catch(RuntimeException e){
-			System.out.println("invalid index: getCard ");
-			System.out.println(e.getMessage());
+		T temp;
+		if(index > cards.length || index < 0){
+			throw new RuntimeException();
 		}
-		return null;
+		if(cards[index] != null){
+			//numCards--;
+			temp = cards[index];
+			//cards[index] = null;
+			return temp;
+		}else{
+			throw new RuntimeException();
+		}
 	}
 
 	/**
@@ -101,22 +102,19 @@ public class Hand<T extends Card>{
 				temp[i] = cards[i];
 			}
 			cards = temp;
-			for(Card x : cards){
-				if(x == null){
-					x = c;
+			for(int i = 0; i < cards.length; i++){
+				if(cards[i] == null){
+					cards[i] = c;
 					numCards++;
 					return;
 				}
 			}
 		}else{
-			int index = 0;
-			for(Card x : cards){
-				if(x == null){
-					cards[index] = c;
+			for(int i = 0; i < cards.length; i++){
+				if(cards[i] == null){
+					cards[i] = c;
 					numCards++;
 					return;
-				}else{
-					index++;
 				}
 			}
 		}
@@ -134,13 +132,16 @@ public class Hand<T extends Card>{
 		 // find the index of a given card c, 
 		 // returns -1 if not found	
 		 // O(N)
-		if(c == null){
-			return -1;
-		}
-		for(int i = 0; i < numCards; i++){
-			if(c.equals(cards[i])){
-				return i;
+		int count = 0;
+		if(c != null){
+			for(Card x : cards){
+				if(x != null && x.equals(c)){
+					return count;
+				}
+				count++;
 			}
+		}else{
+			return -1;
 		}
 		return -1;
 	}

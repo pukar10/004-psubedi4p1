@@ -93,17 +93,27 @@ public class BoardSwitch<T extends Card> extends Board<T>{
 		// add another player in the linked list
 		// should add to the left of currentPlayer
 		// O(N)
-        Player tempPlayerIterator = super.currentPlayer;
-        if(super.numPlayer == 0){
+        if(super.numPlayer == 0) {
             super.currentPlayer = x;
             super.currentPlayer.setNext(x);
             super.numPlayer++;
-        }else{
+            return;
+        }
+        if(super.numPlayer == 1){
+            super.currentPlayer.setNext(x);
+            x.setNext(super.currentPlayer);
+            super.numPlayer++;
+            return;
+        }
+        else{
+            Player temp = super.currentPlayer;
             for(int i = 1; i < super.numPlayer; i++){
-                tempPlayerIterator = tempPlayerIterator.getNext();
-                tempPlayerIterator.setNext(x);
-                x.setNext(super.currentPlayer);
+                temp = temp.getNext();
             }
+            temp.setNext(x);
+            x.setNext(super.currentPlayer);
+            super.numPlayer++;
+            return;
         }
 	}
 
@@ -151,6 +161,7 @@ public class BoardSwitch<T extends Card> extends Board<T>{
 		Player<CardSwitch> player2 = new Player<CardSwitch>("Jerry");
 
 		myBoard.addPlayer(player1);
+//		System.out.println(myBoard.getNumPlayers());
 		
 		if (myBoard.getNumPlayers() ==1  && myBoard.getCurrentPlayer() == player1
 			&& player1.getNext() == player1){
@@ -158,12 +169,15 @@ public class BoardSwitch<T extends Card> extends Board<T>{
 		}
 
 		myBoard.addPlayer(player2);
-		if (myBoard.getNumPlayers() ==2  && myBoard.getCurrentPlayer() == player1
+//		System.out.println(myBoard.getNumPlayers());
+
+		if (myBoard.getNumPlayers() == 2  && myBoard.getCurrentPlayer() == player1
 			&& (myBoard.changeTurn()==true) && myBoard.getCurrentPlayer() == player2){
 			System.out.println("Yay 2");
 		}
 		
 		player1.receiveCard(new CardSwitch(Card.Rank.ACE, Card.Suit.SPADES));
+		System.out.println(player1.toString());
 		player1.receiveCard(new CardSwitch(Card.Rank.JACK, Card.Suit.CLUBS));
 		player2.receiveCard(new CardSwitch(Card.Rank.NINE, Card.Suit.HEARTS));
 		player2.receiveCard(new CardSwitch(Card.Rank.THREE, Card.Suit.SPADES));
