@@ -1,5 +1,5 @@
 /**************************************************************************
- * @author <INSERT YOUR NAME>
+ * @author Pukar Subedi
  * CS310 Spring 2018
  * Project 1
  * George Mason University
@@ -55,6 +55,8 @@ public class CardSwitch extends Card{
     @Override
     public int getPoints(){
 	    // return points of the card
+        //always comfortable with if statements. don't know if switch is a faster implementation or if it matters.
+
         if(super.getRank() == Rank.ACE){
             return 1;
         }

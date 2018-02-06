@@ -1,5 +1,5 @@
 /**************************************************************************
- * @author <INSERT YOUR NAME>
+ * @author Pukar Subedi
  * CS310 Spring 2018
  * Project 1
  * George Mason University
@@ -70,12 +70,6 @@ class Player <T extends Card> {
 	public int getPoints(){
 		// return points of this player
 		// determined by cards in hand
-		int total = 0;
-		for(int i = 0; i < hand.numCards(); i++){
-			total += hand.getCard(i).getPoints();
-		}
-
-
 		int totalPoints = 0;
 		for(int i = 0; i < hand.numCards(); i++){
 			Card temp = hand.getCard(i);

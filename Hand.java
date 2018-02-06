@@ -2,7 +2,7 @@ import javax.swing.text.JTextComponent;
 import java.lang.reflect.Array;
 
 /**************************************************************************
- * @author <INSERT YOUR NAME>
+ * @author Pukar Subedi
  * CS310 Spring 2018
  * Project 1
  * George Mason University
@@ -31,7 +31,8 @@ public class Hand<T extends Card>{
 	public Hand(){
 		// constructor
 		// initial size of cards must be no greater than 5
-		cards = (T[]) new Card[5];
+
+		cards = (T[]) new Card[5];		//set initial size to 5.
 	}
 	
 	public int numCards(){
@@ -53,7 +54,7 @@ public class Hand<T extends Card>{
 		// throw RuntimeException for invalid index
 		// O(1)
 		T temp;
-		if(index > cards.length || index < 0){
+		if(index > cards.length || index < 0){		//given index cannot be larger than array.length or smaller than 0.
 			throw new RuntimeException();
 		}
 		if(cards[index] != null){
@@ -78,11 +79,10 @@ public class Hand<T extends Card>{
 		// change the card at index to be c	
 		// throw RuntimeException for invalid index
 		// O(1)
-		try{
+		if(index >= 0 && index <= this.numCards && c != null){
 			cards[index] = c;
-		}catch(RuntimeException e){
-			System.out.println("invalid index: setCard ");
-			System.out.println(e.getMessage());
+		}else{
+			throw new RuntimeException();
 		}
 	}
 
@@ -96,20 +96,20 @@ public class Hand<T extends Card>{
 	public void addCard(T c){
 		// add card c at the end 
 		// O(N)
-		if(cards.length == numCards){
-			T[] temp = (T[]) new Card[cards.length+5];
+		if(cards.length == numCards){					//checks if array is big enough.
+			T[] temp = (T[]) new Card[cards.length+5];	//creates new array and transfers all cards over.
 			for(int i = 0; i < cards.length; i++){
 				temp[i] = cards[i];
 			}
 			cards = temp;
-			for(int i = 0; i < cards.length; i++){
+			for(int i = 0; i < cards.length; i++){		//adds card to hand.
 				if(cards[i] == null){
 					cards[i] = c;
 					numCards++;
 					return;
 				}
 			}
-		}else{
+		}else{											//if hand-array is big enough just adds card without temp array.
 			for(int i = 0; i < cards.length; i++){
 				if(cards[i] == null){
 					cards[i] = c;
@@ -159,19 +159,17 @@ public class Hand<T extends Card>{
 		// remove the card at index, 
 		// throw RuntimeException for invalid index
 		// O(N)
-		try{
+		if(index < 0 || index > cards.length){			//if index is < 0 or > hand-array.length throw exception!
+			throw new RuntimeException();
+		}else{
 			T temp = cards[index];
 			cards[index] = null;
-			for(int i = index; i <= numCards+1; i++){
+			for(int i = index; i <= numCards+1; i++){	//removes card and fills in null space.
 				cards[index] = cards[index+1];
 			}
 			numCards--;
 			return temp;
-		}catch(RuntimeException e){
-			System.out.println("Invalid index: removeCard Hand.java");
-			System.out.println(e.getMessage());
 		}
-		return null;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**************************************************************************
- * @author <INSERT YOUR NAME>
+ * @author Pukar Subedi
  * CS310 Spring 2018
  * Project 1
  * George Mason University
@@ -93,19 +93,22 @@ public class BoardSwitch<T extends Card> extends Board<T>{
 		// add another player in the linked list
 		// should add to the left of currentPlayer
 		// O(N)
-        if(super.numPlayer == 0) {
+
+        //split addPlayer into 3 conditions.
+
+        if(super.numPlayer == 0) {              //adding player if there is none
             super.currentPlayer = x;
             super.currentPlayer.setNext(x);
             super.numPlayer++;
             return;
         }
-        if(super.numPlayer == 1){
+        if(super.numPlayer == 1){               //adding if there is already 1 player
             super.currentPlayer.setNext(x);
             x.setNext(super.currentPlayer);
             super.numPlayer++;
             return;
         }
-        else{
+        else{                                   //adding player for any other condition
             Player temp = super.currentPlayer;
             for(int i = 1; i < super.numPlayer; i++){
                 temp = temp.getNext();
@@ -129,6 +132,9 @@ public class BoardSwitch<T extends Card> extends Board<T>{
     public Player<T> findWinner(){
 		// return the player with the highest point
 		// O(N)
+
+        //set max to 0 anything larger, while iterating, will replace it.
+
         Player tempPlayerIterator = super.currentPlayer;
         int max = 0;
         Player tempWinner = null;
